@@ -1,0 +1,1 @@
+put landsat scene metadata from glovis here
