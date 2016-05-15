@@ -1,0 +1,1 @@
+upper case folders are generated. title case are where you put the inputs.
