@@ -1,0 +1,19 @@
+# Stuff to always ignore
+*.pyc
+*.pyo
+
+# Generated directories to always ignore
+/EXTRACTS/*
+/LOGS/*
+/PROCESSED/*
+/Inputs/LAKE BOXES/*
+/Inputs/LAKE POINTS/*
+
+# Input directories to ignore most the contents of (to make empty input dirs)
+/Inputs/Lake Shapes/*
+/Inputs/LS Images/*
+/Inputs/LS Metadata/*
+/Inputs/Sample Sites/*
+/Inputs/WQ Data/*
+# Except for the readme.txt which makes the almost empty dirs available on git
+!readme.txt

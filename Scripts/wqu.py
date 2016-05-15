@@ -124,7 +124,8 @@ Get the list using parse?
 Read check for clip, read for dnmin, then clip and save to new dir.
     """
 
-    log = module_logger.getChild(__name__)
+    #log = module_logger.getChild(__name__)
+    log = logger.getChild(inspect.currentframe().f_code.co_name)
     #logger = log.main(__file__, settings['Log Path'])
     #log = logging.getLogger('addon')
     log.info(u'Initializing {}'.format(__file__))
@@ -436,7 +437,7 @@ def parse_metadata(unique_lake_id_list, read_wq_file, id_md_list):
 import logging
 import inspect
 from itertools import izip
-import flatten
+#import flatten
 from variables import *
 module_logger = logging.getLogger(os.path.basename(inspect.stack()[1][1]).split('.')[0])
 
@@ -484,7 +485,7 @@ def select_images(args):
                 x + settings['date_allowance']), lake[3])
             # flatten list
             #acceptable_bump_dates_list = flatten(acceptable_bump_dates)
-            acceptable_bump_dates_list = flatten.main(acceptable_bump_dates)
+            acceptable_bump_dates_list = flatten(acceptable_bump_dates)
             log.debug('acceptable_bump_dates_list: {}'.format(acceptable_bump_dates_list))
 
             acceptable_scenes = [i for i in ls_scene_list if i[2] in acceptable_bump_dates_list]
