@@ -47,7 +47,7 @@ point_dir = 'LAKE POINTS'
 
 settings = {
 # file types this script can read
-'Input_Types': ['.csv', '.txt', '.shp'],
+'Input_Types': ['.csv', '.shp'], #'.txt', Removed to except github READMEs
 # Log config file name (in script dir)
 'Log Config': 'log.ini',
 #'Log Path': (os.path.join(working_dir, script_dir, log_dir)),

@@ -5,8 +5,8 @@
 # Author:      clay barrett
 #
 # Created:     14/05/2016
-# Copyright:   (c) admin 2016
-# Licence:     <your licence>
+# Copyright:   (c) clay barrett 2016
+# Licence:     see License.txt
 #-------------------------------------------------------------------------------
 
 from itertools import chain
@@ -37,30 +37,28 @@ def list_find(list, search_term, header=0):
 what does header mean?
     Returns ['R, C', 'List of stuff -header']
     """
-    logger = module_logger.getChild(__name__)
-    #log = logger.getChild(inspect.currentframe().f_code.co_name)
-    #logger = log.main(__file__, settings['Log Path'])
-    logger.debug('Initializing {}'.format(__file__))
-    logger.debug('for {} in {}'.format(search_term, list))
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
+    log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
+    log.debug('for {} in {}'.format(search_term, list))
     result = []
 
     # see if term is in the list
     term_row = [idx for idx in list if search_term in idx]
-    logger.debug('term row: {}'.format(term_row))
+    log.debug('term row: {}'.format(term_row))
     # possible outcomes are 0 = not found, 1 = expected to find one time, >1 = problem...
     # this is a list comp, so result is a list. check length!
     if len(term_row) == 1:
         # get the index of the row term was found in
         term_row_i = [i for i, x in enumerate(list) if search_term in x][0]
-        logger.debug('term row_i: {}'.format(term_row_i))
+        log.debug('term row_i: {}'.format(term_row_i))
         # get the column index it was found in
         term_col_i = [x for x, i in enumerate(term_row[0]) if i == search_term][0]  # returns i as list, so [0]
-        logger.debug('term col_i: {}'.format(term_col_i))
+        log.debug('term col_i: {}'.format(term_col_i))
         # with start row and col found, find last col and return a selection
         # only get from header row +1 to last row
         # can deal with an extra, blank line result on return
         selection = [x[term_col_i] for idx, x in enumerate(list) if idx in range(term_row_i +1, len(list))] # but this leaves blank on the end of names
-        logger.debug('list_find selection dump: {}'.format(selection)) # should gaurd against blanks above header row
+        log.debug('list_find selection dump: {}'.format(selection)) # should gaurd against blanks above header row
 
         # stick header on if desired
         if header:
@@ -69,9 +67,9 @@ what does header mean?
         else:
             result = [[term_row_i, term_col_i], selection]
     else:
-        logger.warning(u'Failed to find {} exactly once in list'.format(search_term))
+        log.warning(u'Failed to find {} exactly once in list'.format(search_term))
         result = [0, 0]
-    logger.debug('list_find result: {}'.format(result))
+    log.debug('list_find result: {}'.format(result))
     return result
 
 import os
@@ -87,8 +85,8 @@ def objectify_dates(args, format):
     Takes a date string(s) in the forms both DD/MM/YYYY YYYY/MM/DD, returns a date object(s).
     Temp variance to just pass through Date header
     """
-    log = module_logger.getChild(__file__)
-    log.debug('Initializing {}'.format(__file__))
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
+    log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     #log.debug('with: {}'.format(args))
     result = []
 
@@ -124,11 +122,8 @@ Get the list using parse?
 Read check for clip, read for dnmin, then clip and save to new dir.
     """
 
-    #log = module_logger.getChild(__name__)
-    log = logger.getChild(inspect.currentframe().f_code.co_name)
-    #logger = log.main(__file__, settings['Log Path'])
-    #log = logging.getLogger('addon')
-    log.info(u'Initializing {}'.format(__file__))
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
+    log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     result = []
 
     # Load all Input_Types files in curdir to a list
@@ -158,7 +153,6 @@ Read check for clip, read for dnmin, then clip and save to new dir.
             log.debug('no {}  file was found'.format(settings['Input_Types']))
     if result:
         log.debug('found an input')
-        ## uh raise exception
 
     return result
 
@@ -178,10 +172,8 @@ def read_file_selection(*args):
 
     Returning list of tuples [(head 1, head 2), (d1, d2), (etc)]
     """
-    log = module_logger.getChild(__name__)
-    #log = logging.getLogger(inspect.currentframe().f_code.co_name)
-    #logger = log.main(__file__, settings['Log Path'])
-    log.info(u'Initializing {}'.format(__file__))
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
+    log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     log.debug('with: {}'.format(args))
 
     input = args[0]
@@ -267,8 +259,7 @@ def select_md_files(*args):
 
     Get all file names from the metadata folder.
     """
-    log = module_logger.getChild(__name__)
-    #log = logger.getChild(inspect.currentframe().f_code.co_name)
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
     log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     result = []
     loc = args[0]
@@ -356,8 +347,7 @@ def parse_metadata(unique_lake_id_list, read_wq_file, id_md_list):
     Input: uniq list of lake ids, list of lake sample dates, list of all csv files (LS metadata)
     Returns ['Lake ID', 'Lake name', [Lake file list], [list of same date objects], [selected metadata]', *]
     """
-    log = module_logger.getChild(__name__)
-    #log = logger.getChild(inspect.currentframe().f_code.co_name)
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
     log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     log.debug('with: {} \n {} \n {}'.format(unique_lake_id_list, read_wq_file, id_md_list))
     result = []
@@ -450,8 +440,7 @@ def select_images(args):
     Returns ['lake id, lake name, lake files, dates object list,
     [scenes, date_objects, * that are within date_allowance]', *]
     """
-    log = module_logger.getChild(__name__)
-    #log = logger.getChild(inspect.currentframe().f_code.co_name)
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
     log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     result = []
     scene_count = 0
@@ -509,8 +498,7 @@ def code_images(args):
     Input is a complex list. Output is a sorted, simple, coded list for output as CSV.
 
     """
-    log = module_logger.getChild(__name__)
-    #log = logger.getChild(inspect.currentframe().f_code.co_name)
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
     log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     result = []
     scene_selection = args
@@ -571,10 +559,10 @@ def write_csv_output(input, path, output_name):
 
     """
     # write output into output folder
-    log = module_logger.getChild(__name__)
-    #log.debug('with: {}'.format(args))
+    log = module_logger.getChild(inspect.currentframe().f_code.co_name)
+    log.info(u'Initializing {}'.format(inspect.currentframe().f_code.co_name))
     log.debug('with: {} {} {}'.format(input, path, output_name))
-    #output_path = working_dir, settings['Processed Dir'], settings['Final Output']
+
     output_file = os.path.join(path, output_name)
     log.debug('output saving as: {}'.format(output_file))
     log.debug('output_file type: {}'.format(type(output_file)))

@@ -104,7 +104,7 @@ if __name__ == '__main__':
         os.makedirs(settings['Log Path'])
     # setup logger
     log_ini = os.path.abspath( os.path.join(working_dir, script_dir, settings['Log Config']))
-    logging.config.fileConfig(log_ini, defaults={'logfilename': settings['Log Name']})
+    logging.config.fileConfig(log_ini, defaults={'logfilename': os.path.join(settings['Log Path'], settings['Log Name'])})
     main_logger = logging.getLogger(os.path.basename(__file__).split('.')[0])
 
     main()
