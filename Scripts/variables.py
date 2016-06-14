@@ -6,24 +6,14 @@
 #
 # Created:     01/may/2016
 # Copyright:   (c) clay barrett 2016
-# Licence:
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details <http://www.gnu.org/licenses/>.
+# Licence:     see License.txt
 #-------------------------------------------------------------------------------
 import os
 from os.path import join
 from datetime import timedelta
 
 # cannot call things in the dict to make other things in the dict, so predefine these
-# working_dir needs to be up one level from script_dir
-#working_dir = os.getcwd()
+# working_dir is up one level from script_dir
 working_dir = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 script_dir = 'scripts'
 log_dir = 'LOGS'
@@ -33,19 +23,19 @@ shape_dir = 'Lake Shapes'
 # drop?
 Original_Path = ""
 Problem_List = []
-# OWRB Sample site coordinates
-coord_dir = 'Sample Sites'
+coord_dir = 'Sample Sites'              # OWRB Sample site coordinates
 lsmetadata_dir = 'LS Metadata'
 scene_dir = 'LS Images'
-output_dir = 'PROCESSED'
+clip_dir = 'CLIPPED'                # Clip output dir
 extract_dir = 'EXTRACTS'
 # Intermediaries
 box_dir = 'LAKE BOXES'
-# Directory for shp with each lakes coords
-point_dir = 'LAKE POINTS'
+point_dir = 'LAKE POINTS'               # Directory for shp with each lakes coords
 #image_list = 'Scene Order List.csv'
 
 settings = {
+'Arc Overwrite': 'True',                # Value for env.overwriteOutput
+'Do_COSTDOS': 0,                    # Toggle to extract DOS values and correct clips
 # file types this script can read
 'Input_Types': ['.csv', '.shp'], #'.txt', Removed to except github READMEs
 # Log config file name (in script dir)
@@ -53,6 +43,8 @@ settings = {
 #'Log Path': (os.path.join(working_dir, script_dir, log_dir)),
 'Log Path': (os.path.join(working_dir, log_dir)),
 'Log Name': 'logs.txt',
+# Extention of Landsat scenes
+'LS Extention': 'TIF',
 # Output from Preprocessing
 'Image List': 'Scene Order List.csv',
 #'Image List Path': (os.path.join(working_dir, image_list)),
@@ -66,7 +58,7 @@ settings = {
 'Point Path': (os.path.join(working_dir, input_dir, point_dir)),
 'Scene Path': (os.path.join(working_dir, input_dir, scene_dir)),
 'Extract Path': (os.path.join(working_dir, extract_dir)),
-'Output Path': (os.path.join(working_dir, output_dir)),
+'Clip Path': (os.path.join(working_dir, clip_dir)),
 # LS scene info folder
 'Metadata_Path': (os.path.join(working_dir, input_dir, lsmetadata_dir)),
 ## Preprocessing's Output
