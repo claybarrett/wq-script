@@ -276,4 +276,3 @@ if __name__ == '__main__':
     logger = logging.getLogger(os.path.basename(__file__).split('.')[0])
 
     main()
-
